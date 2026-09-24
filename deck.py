@@ -1,21 +1,22 @@
 import json
+  
 def criaPersonagem():
-  personagem = {
-      'nome': input('Digite o nome: '),
-      'classe': input('Digite a classe: '),
-      'nivel': int(input('Digite o nivel do personagem: ')),
-      'PV Maximo': int(input('Digite o PV Máximo: ')),
-      'PV Atual': int(input('Digite o PV Atual: ')),
-      "atributos": {
-          'Força': int(input('Digite a valor da Força do personagem: ')),
-          'Destreza': int(input('Digite a valor da Destreza do personagem: ')),
-          'Constituição': int(input('Digite a valor da Constituição do personagem: ')),
-          'Inteligencia': int(input('Digite a valor da Inteligencia do personagem: ')),
-          'Sabedoria': int(input('Digite a valor da Sabedoria do personagem: ')),
-          'Carisma': int(input('Digite a valor do Carisma do personagem: '))
-      }
-    }
-  return personagem
+    personagem = {
+          'nome': input('Digite o nome: '),
+          'classe': input('Digite a classe: '),
+          'nivel': int(input('Digite o nivel do personagem: ')),
+          'PV Maximo': int(input('Digite o PV Máximo: ')),
+          'PV Atual': int(input('Digite o PV Atual: ')),
+          'atributos': {
+              'Força': int(input('Digite a valor da Força do personagem: ')),
+              'Destreza': int(input('Digite a valor da Destreza do personagem: ')),
+              'Constituição': int(input('Digite a valor da Constituição do personagem: ')),
+              'Inteligencia': int(input('Digite a valor da Inteligencia do personagem: ')),
+              'Sabedoria': int(input('Digite a valor da Sabedoria do personagem: ')),
+              'Carisma': int(input('Digite a valor do Carisma do personagem: '))
+          },
+        }
+    return personagem
 
 def mostraPersonagem(personagem):
   print('\n================================')
@@ -128,4 +129,4 @@ def menu():
       elif msg == 'arquivo corrompido':
         print('Ficha corrompida')
 
-menu()
+
