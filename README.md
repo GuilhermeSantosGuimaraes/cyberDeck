@@ -51,9 +51,10 @@ Versão atual: 0.1.0
 Sistema básico de ficha e persistência.
 
 ### 0.2.0
-Atributos e perícias.
+POO
 
 ### 0.3.0
+Atributos e perícias.
 Magias e espaços de magia.
 
 ### 0.4.0
