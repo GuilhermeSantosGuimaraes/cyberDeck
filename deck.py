@@ -2,18 +2,27 @@ import json
 import os
 
 class Personagem:
-  def __init__(self, nome, classe, nivel, pvMax, pvAtual, atributos):
+  def __init__(self, nome, classe, raca, nivel, pvMax, pvAtual, atributos, ca, antecedente, deslocamento, itens = None, magias = None, truques = None):
     self.nome = nome
     self.classe = classe
     self.nivel = nivel
+    self.raca = raca
     self.pvMax = pvMax
     self.pvAtual = pvAtual
     self.atributos = atributos
+    self.bonusProf = ((self.nivel - 1) // 4) + 2
+    self.ca = ca
+    self.antecedente = antecedente
+    self.deslocamento = deslocamento
+    self.itens = itens if itens is not None else []
+    self.magias = magias if magias is not None else []
+    self.truques = truques if truques is not None else []
 
   @classmethod
   def criar(cls):
     nome = input('Digite o nome: ')
     classe = input('Digite a classe: ')
+    raca = input('Digite sua raça: ')
     nivel = int(input('Digite o nivel do personagem: '))
     pvMax = int(input('Digite o PV Máximo: '))
     pvAtual = int(input('Digite o PV Atual: '))
@@ -25,8 +34,32 @@ class Personagem:
       'Sabedoria': int(input('Digite a valor da Sabedoria do personagem: ')),
       'Carisma': int(input('Digite a valor do Carisma do personagem: '))
     }
+    ca = int(input('Digite o CA do personagem: '))
+    antecedente = input('Digite seu antecedente: ')
+    deslocamento = int(input('Digite o descolamento do personagem em Metros:'))
     
-    return cls(nome, classe, nivel, pvMax, pvAtual, atributos)
+    itens = []
+    novoItem = ""
+    while novoItem != 'sair':
+      novoItem = input("Digite o item do seu personagem ou 'sair' para fechar: ").lower()
+      if novoItem != 'sair':
+        itens.append(novoItem)
+
+    magias = []
+    novaMagia = ""
+    while novaMagia != 'sair':
+      novaMagia = input("Digite a magia do seu personagem ou 'sair' para fechar: ").lower()
+      if novaMagia != 'sair':
+        magias.append(novaMagia)
+
+    truques = []
+    novoTruque = ""
+    while novoTruque != 'sair':
+      novoTruque = input("Digite o truque do seu personagem ou 'sair' para fechar: ").lower()
+      if novoTruque != 'sair':
+        truques.append(novoTruque)   
+
+    return cls(nome, classe, raca, nivel, pvMax, pvAtual, atributos, ca, antecedente, deslocamento, itens, magias, truques)
 
   def mostraPersonagem(self):
     print('\n================================')
@@ -35,7 +68,12 @@ class Personagem:
 
     print(f'\nNome: {self.nome}')
     print(f'Classe: {self.classe}')
+    print(f'Raça: {self.raca}')
     print(f'Nível: {self.nivel}')
+    print(f'Bonus de Proficiência: {self.bonusProf}')
+    print(f'Classe de Armadura: {self.ca}')
+    print(f'Antecedente: {self.antecedente}')
+    print(f'Deslocamento: {self.deslocamento}')
 
     print(f'\nPV: {self.pvAtual}/{self.pvMax}')
 
@@ -43,6 +81,17 @@ class Personagem:
 
     for atributos, valores in self.atributos.items():
       print(f"{atributos}: {valores}")
+
+    print('\n-------- INVENTÁRIO -----------\n')
+
+    for item in self.itens:
+      print(f'Item: {item}')
+
+    print('\n-------- Conjurações -----------\n')
+    for magia in self.magias:
+      print(f'Magia: {magia}')
+    for truque in self.truques:
+      print(f'Truque: {truque}')
 
   def alteraPV(self):
     print('\n1 - Aumentar vida Atual')
@@ -78,10 +127,18 @@ class Personagem:
     personagem = {
       'nome': self.nome,
       'classe': self.classe,
+      'raça': self.raca,
       'nivel': self.nivel,
       'PV Maximo': self.pvMax,
       'PV Atual': self.pvAtual,
-      'atributos': self.atributos
+      'atributos': self.atributos,
+      'bonus proficiencia': self.bonusProf,
+      'ca': self.ca,
+      'antecedente': self.antecedente,
+      'deslocamento': self.deslocamento,
+      'itens': self.itens,
+      'magias': self.magias,
+      'truques': self.truques
     }
 
     return personagem
@@ -90,78 +147,20 @@ class Personagem:
   def de_dict(cls, dados):
     nome = dados['nome']
     classe = dados['classe']
+    raca = dados['raça']
     nivel = dados['nivel']
     pvMax = dados['PV Maximo']  
     pvAtual = dados['PV Atual']
     atributos = dados['atributos']
+    ca = dados['ca']
+    antecedente = dados['antecedente']
+    deslocamento = dados['deslocamento']
+    itens = dados['itens']
+    magias = dados['magias']
+    truques = dados['truques']
 
-    return cls(nome, classe, nivel, pvMax, pvAtual, atributos)
-    
-def criaPersonagem():
-    personagem = {
-          'nome': input('Digite o nome: '),
-          'classe': input('Digite a classe: '),
-          'nivel': int(input('Digite o nivel do personagem: ')),
-          'PV Maximo': int(input('Digite o PV Máximo: ')),
-          'PV Atual': int(input('Digite o PV Atual: ')),
-          'atributos': {
-              'Força': int(input('Digite a valor da Força do personagem: ')),
-              'Destreza': int(input('Digite a valor da Destreza do personagem: ')),
-              'Constituição': int(input('Digite a valor da Constituição do personagem: ')),
-              'Inteligencia': int(input('Digite a valor da Inteligencia do personagem: ')),
-              'Sabedoria': int(input('Digite a valor da Sabedoria do personagem: ')),
-              'Carisma': int(input('Digite a valor do Carisma do personagem: '))
-          },
-        }
-    return personagem
+    return cls(nome, classe, raca, nivel, pvMax, pvAtual, atributos, ca, antecedente, deslocamento, itens, magias, truques)
 
-def mostraPersonagem(personagem):
-  print('\n================================')
-  print('           RPG DECK             ')
-  print('================================')
-
-  print(f'\nNome: {personagem['nome']}')
-  print(f'Classe: {personagem['classe']}')
-  print(f'Nível: {personagem['nivel']}')
-
-  print(f'\nPV: {personagem['PV Atual']}/{personagem['PV Maximo']}')
-
-  print('\n-------- ATRIBUTOS -----------\n')
-
-  for atributos in personagem['atributos']:
-    print(f"{atributos}: {personagem['atributos'][atributos]}")
-
-def alteraPV(personagem):
-  print('\n1 - Aumentar vida Atual')
-  print('2 - Diminuir vida Atual')
-  print('3 - Aumentar vida Máxima')
-  print('4 - Diminuir vida Máxima')
-  opcao = int(input('Digite a sua opção: '))
-
-  if opcao < 1 or opcao > 4:
-    print('Opção inválida')
-  elif opcao == 1:
-    valor = int(input("Digite quanto de cura seu personagem recebeu: "))
-    personagem['PV Atual'] += valor
-  elif opcao == 2:
-    valor = int(input("Digite quanto de dano seu personagem recebeu: "))
-    valorNovo = personagem['PV Atual'] - valor
-    if valorNovo <= 0:
-      personagem['PV Atual'] = 0
-    else:
-      personagem['PV Atual'] = valorNovo
-  elif opcao == 3:
-    valor = int(input("Digite quanto de PV Máxima aumenta: "))
-    personagem['PV Maximo'] += valor
-  elif opcao == 4:
-    valor = int(input("Digite quanto de PV Máxima diminuiu: "))
-    valorNovo = personagem['PV Maximo'] - valor
-    if valorNovo <= 0:
-      personagem['PV Maximo'] = 0
-    else:
-      personagem['PV Maximo'] = valorNovo
-
-  return personagem
 
 def salvar(personagem):
   dicionario = personagem.para_dict()
