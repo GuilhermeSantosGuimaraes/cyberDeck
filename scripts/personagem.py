@@ -17,42 +17,42 @@ class Personagem:
 
   @classmethod
   def criar(cls):
-    nome = input('Digite o nome: ')
-    classe = input('Digite a classe: ')
-    raca = input('Digite sua raça: ')
-    nivel = int(input('Digite o nivel do personagem: '))
-    pvMax = int(input('Digite o PV Máximo: '))
-    pvAtual = int(input('Digite o PV Atual: '))
+    nome = input('\033[91mDigite o nome: \033[0m')
+    classe = input('\033[91mDigite a classe: \033[0m')
+    raca = input('\033[91mDigite sua raça: \033[0m')
+    nivel = int(input('\033[91mDigite o nivel do personagem: \033[0m'))
+    pvMax = int(input('\033[91mDigite o PV Máximo: \033[0m'))
+    pvAtual = int(input('\033[91mDigite o PV Atual: \033[0m'))
     atributos = {
-      'Força': int(input('Digite a valor da Força do personagem: ')),
-      'Destreza': int(input('Digite a valor da Destreza do personagem: ')),
-      'Constituição': int(input('Digite a valor da Constituição do personagem: ')),
-      'Inteligencia': int(input('Digite a valor da Inteligencia do personagem: ')),
-      'Sabedoria': int(input('Digite a valor da Sabedoria do personagem: ')),
-      'Carisma': int(input('Digite a valor do Carisma do personagem: '))
+      'Força': int(input('\033[91mDigite a valor da Força do personagem: \033[0m')),
+      'Destreza': int(input('\033[91mDigite a valor da Destreza do personagem: \033[0m')),
+      'Constituição': int(input('\033[91mDigite a valor da Constituição do personagem: \033[0m')),
+      'Inteligencia': int(input('\033[91mDigite a valor da Inteligencia do personagem: \033[0m')),
+      'Sabedoria': int(input('\033[91mDigite a valor da Sabedoria do personagem: \033[0m')),
+      'Carisma': int(input('\033[91mDigite a valor do Carisma do personagem: \033[0m'))
     }
-    ca = int(input('Digite o CA do personagem: '))
-    antecedente = input('Digite seu antecedente: ')
-    deslocamento = int(input('Digite o descolamento do personagem em Metros: '))
+    ca = int(input('\033[91mDigite o CA do personagem: \033[0m'))
+    antecedente = input('\033[91mDigite seu antecedente: \033[0m')
+    deslocamento = int(input('\033[91mDigite o descolamento do personagem em Metros: \033[0m'))
     
     itens = []
     novoItem = ""
     while novoItem != 'sair':
-      novoItem = input("Digite o item do seu personagem ou 'sair' para fechar: ").lower()
+      novoItem = input("\033[91mDigite o item do seu personagem ou 'sair' para fechar: \033[0m").lower()
       if novoItem != 'sair':
         itens.append(novoItem)
 
     magias = []
     novaMagia = ""
     while novaMagia != 'sair':
-      novaMagia = input("Digite a magia do seu personagem ou 'sair' para fechar: ").lower()
+      novaMagia = input("\033[91mDigite a magia do seu personagem ou 'sair' para fechar: \033[0m").lower()
       if novaMagia != 'sair':
         magias.append(novaMagia)
 
     truques = []
     novoTruque = ""
     while novoTruque != 'sair':
-      novoTruque = input("Digite o truque do seu personagem ou 'sair' para fechar: ").lower()
+      novoTruque = input("\033[91mDigite o truque do seu personagem ou 'sair' para fechar: \033[0m").lower()
       if novoTruque != 'sair':
         truques.append(novoTruque)   
 
