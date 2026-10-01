@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from personagem import Personagem
 
 def salvar(personagem):
@@ -37,16 +38,21 @@ def menu():
   ficha = None
   opcao = None
   while opcao != 4:
-    print('\n================================')
-    print('           RPG DECK             ')
-    print('================================')
+    os.system('clear')
 
-    print('\n1 - Criar ficha')
-    print('2 - Mostrar ficha')
-    print('3 - Alterar PV')
-    print('4 - Sair')
-    print('5 - Carregar ficha')
-    opcao = int(input('Escolha uma opção: '))
+    print('\033[91m╔═════════════════════════════════════╗\033[0m')
+    print('\033[91m║// MICROCYBER BATTLEDECK :: ADMIN [+]║\033[0m')
+    print('\033[91m╠═════════════════════════════════════╣\033[0m')
+    print('\033[91m║               RPG DECK              ║\033[0m')
+    print('\033[91m╠═════════════════════════════════════╣\033[0m')
+    print("\033[91m║  [ 1 ] :: GERAR_NOVO_REGISTRO       ║\033[0m")
+    print("\033[91m║  [ 2 ] :: EXIBIR_DADOS_ATIVOS       ║\033[0m")
+    print("\033[91m║  [ 3 ] :: ATUALIZAR_SINAIS_VITAIS   ║\033[0m")
+    print("\033[91m║  [ 4 ] :: DESCONECTAR_SISTEMA       ║\033[0m")
+    print("\033[91m║  [ 5 ] :: CARREGAR_ARQUIVO_LOCAL    ║\033[0m")
+    print("\033[91m╚═════════════════════════════════════╝\033[0m")
+    print("\033[91m:: STATUS: AGUARDANDO_INPUT // ■■■■■░░░░░ \033[0m")
+    opcao = int(input('\033[91m >_ INSERIR_COMANDO: \033[0m'))
 
     if opcao < 1 or opcao > 5:
       print('\nNão é um opção valida')
@@ -54,34 +60,45 @@ def menu():
     elif opcao == 1:
       ficha = Personagem.criar()
       salvar(ficha)
+      time.sleep(2)
 
     elif opcao == 2:
       if ficha is None:
         print("\nNão existe ou nenhum ficha foi carregada")
+        time.sleep(2)
       else:
         ficha.mostraPersonagem()
+        input('\033[91m >_ APERTE_ENTER_PARA_CONTINUAR_<\033[0m')
 
     elif opcao == 3:
       if ficha is None:
         print("\nNão existe ou nenhum ficha foi carregada")
+        time.sleep(2)
       else:
         ficha.alteraPV()
         salvar(ficha)
 
     elif opcao == 4:
-        salvar(ficha)
-        print('Ficha Salva!')
-        print("Tchau...")
+        if ficha is None:
+          print("Tchau...")  
+        else:
+          salvar(ficha)
+          print('Ficha Salva!')
+          print("Tchau...")
 
     elif opcao == 5:
       arquivo, msg = carregar()
       if msg == 'sucesso':
         ficha = arquivo
         print('Ficha Carregada')
+        time.sleep(2)
       elif msg == 'nenhuma ficha salva':
         print(msg)
+        time.sleep(2)
       elif msg == 'arquivo corrompido':
         print('Ficha corrompida')
+        time.sleep(2)
       elif msg == 'Não existe fichas de personagem salvas':
         print('Não existe fichas de personagem salvas')
+        time.sleep(2)
 
